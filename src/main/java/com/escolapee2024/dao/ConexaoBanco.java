@@ -26,7 +26,7 @@ public class ConexaoBanco {
     
     private ConexaoBanco(){
         usuario = "root";
-        senha = "";
+        senha = "1234";
         url = "jdbc:mysql://127.0.0.1/escola_pee_dsoo";
         driver = "com.mysql.cj.jdbc.Driver";
     }
