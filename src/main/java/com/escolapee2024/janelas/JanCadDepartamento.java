@@ -45,6 +45,20 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
         }
         
     }
+    
+    public void inserirDepartamento(){
+        String nome = txtNomeDepartamento.getText();
+        String sigla = txtSiglaDepartamento.getText();
+        
+        if (controleDepartamento.inserirDepartamento(nome, sigla)){
+            JOptionPane.showMessageDialog(this, controleDepartamento.getMensagem());
+        }else{
+            JOptionPane.showMessageDialog(this, controleDepartamento.getMensagem(), "Erro", JOptionPane.ERROR);
+        }
+        carregarTabela();
+        txtNomeDepartamento.setText("");
+        txtSiglaDepartamento.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,6 +96,11 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
         jLabel3.setText("Sigla:");
 
         Salvar.setText("Salvar");
+        Salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalvarActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Editar");
 
@@ -198,6 +217,10 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
+        inserirDepartamento();
+    }//GEN-LAST:event_SalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

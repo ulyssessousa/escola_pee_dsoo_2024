@@ -30,5 +30,12 @@ public class ControleDepartamento {
         return mensagem;
     }
     
+    public boolean inserirDepartamento(String nome, String sigla){
+        Departamento departamento = new Departamento(0, nome, sigla);
+        boolean inseriu = daoDepartamento.inserirDepartamento(departamento);
+        mensagem = daoDepartamento.getMensagem();
+        return inseriu;
+        
+    }
     
 }

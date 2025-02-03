@@ -5,6 +5,7 @@
 package com.escolapee2024.dao;
 
 import com.escolapee2024.modelo.Departamento;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,6 +46,22 @@ public class DAODepartamento {
             return null;
         }
         
+    }
+    
+    public boolean inserirDepartamento(Departamento departamento){
+        try {
+            String strSQL = "insert into departamento (nome, sigla) values (?, ?)";
+            PreparedStatement preparedStatement = conexaoBanco.getConnection().prepareStatement(strSQL);
+            preparedStatement.setString(1, departamento.getNome());
+            preparedStatement.setString(2, departamento.getSigla());
+            preparedStatement.execute();
+            mensagem = "O departamento " + departamento.getNome() + " inserido com sucesso.";
+            preparedStatement.close();
+            return true;
+        } catch (SQLException ex) {
+            mensagem = "Erro: " + ex.getMessage();
+            return false;
+        }
     }
 
     public String getMensagem() {
