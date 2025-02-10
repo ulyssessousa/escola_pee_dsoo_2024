@@ -38,4 +38,10 @@ public class ControleDepartamento {
         
     }
     
+    public boolean excluirDepartamento(int codigoDepartamento){
+        boolean excluiu = daoDepartamento.excluirDepartamento(codigoDepartamento);
+        mensagem = daoDepartamento.getMensagem();
+        return excluiu;
+    }
+    
 }

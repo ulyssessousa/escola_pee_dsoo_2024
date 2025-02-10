@@ -46,7 +46,7 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
         
     }
     
-    public void inserirDepartamento(){
+    private void inserirDepartamento(){
         String nome = txtNomeDepartamento.getText();
         String sigla = txtSiglaDepartamento.getText();
         
@@ -58,6 +58,23 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
         carregarTabela();
         txtNomeDepartamento.setText("");
         txtSiglaDepartamento.setText("");
+    }
+    
+    private void excluirDepartamento(){
+        int linhaSelecionada = tblDepartamento.getSelectedRow();
+        if (linhaSelecionada < 0){
+            JOptionPane.showMessageDialog(this, "Por favor, selecione um departamento.");
+        }else{
+            DefaultTableModel modeloTabela = (DefaultTableModel) tblDepartamento.getModel();
+            
+            int codigoDepartamento = (int) modeloTabela.getValueAt(linhaSelecionada, 0);
+            if (controleDepartamento.excluirDepartamento(codigoDepartamento)){
+                JOptionPane.showMessageDialog(this, controleDepartamento.getMensagem());
+            }else{
+                JOptionPane.showMessageDialog(this, controleDepartamento.getMensagem(), "Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -105,6 +122,11 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
         jButton1.setText("Editar");
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -221,6 +243,11 @@ public class JanCadDepartamento extends javax.swing.JInternalFrame {
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         inserirDepartamento();
     }//GEN-LAST:event_SalvarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        excluirDepartamento();
+        carregarTabela();
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

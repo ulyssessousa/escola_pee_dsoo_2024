@@ -63,6 +63,21 @@ public class DAODepartamento {
             return false;
         }
     }
+    
+    public boolean excluirDepartamento(int codigo){
+        try {
+            String strSSQL = "DELETE FROM escola_pee_dsoo.departamento where codigodepartamento = ?;";
+            PreparedStatement preparedStatement = conexaoBanco.getConnection().prepareStatement(strSSQL);
+            preparedStatement.setInt(1, codigo);
+            preparedStatement.execute();
+            mensagem = "Departamento excluído com sucesso.";
+            preparedStatement.close();
+            return true;
+        } catch (SQLException ex) {
+            mensagem = "Erro ao tentar excluir o departamento selecionado: " + ex.getMessage();
+            return false;
+        }
+    }
 
     public String getMensagem() {
         return mensagem;
